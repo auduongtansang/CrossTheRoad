@@ -13,18 +13,48 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Console">
+      <UniqueIdentifier>{256d796f-fb36-433b-ab42-806b5c686abc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Game">
+      <UniqueIdentifier>{7445e3f2-a524-4ef6-bda1-6979ebee947c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\People">
+      <UniqueIdentifier>{97376ad1-40c8-459c-8757-9049be1cb470}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Cars">
+      <UniqueIdentifier>{93a6c5aa-6a76-42e9-85a8-592911984a60}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="Console.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files\Console</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Header Files\Game</Filter>
+    </ClCompile>
+    <ClCompile Include="People.cpp">
+      <Filter>Header Files\People</Filter>
+    </ClCompile>
+    <ClCompile Include="Cars.cpp">
+      <Filter>Header Files\Cars</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Console.h">
-      <Filter>Header Files</Filter>
+      <Filter>Header Files\Console</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Header Files\Game</Filter>
+    </ClInclude>
+    <ClInclude Include="People.h">
+      <Filter>Header Files\People</Filter>
+    </ClInclude>
+    <ClInclude Include="Cars.h">
+      <Filter>Header Files\Cars</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
