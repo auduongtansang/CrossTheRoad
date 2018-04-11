@@ -17,14 +17,14 @@ void GamePause(HANDLE thread)
 	SuspendThread(thread);
 }
 
-void GameEnd(HANDLE thread)
-{
-	TerminateThread(thread, 0);
-}
-
 void GameOver(bool &isAlive)
 {
 	isAlive = false;
+}
+
+void GameEnd(HANDLE thread)
+{
+	TerminateThread(thread, 0);
 }
 
 bool Impact(People people, Cars cars, Peoples finished)
