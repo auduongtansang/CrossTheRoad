@@ -39,7 +39,7 @@ void PeopleDraw(People people, Buffer &buffer)
 	buffer[people.position.X][people.position.Y] = people.character;
 }
 
-void FinisedDraw(Peoples finished, Buffer &buffer)
+void FinishedDraw(Peoples finished, Buffer &buffer)
 {
 	for (int i = 0; i < (int)(finished.size()); i++)
 	{

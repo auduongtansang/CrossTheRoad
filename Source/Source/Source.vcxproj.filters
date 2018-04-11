@@ -25,6 +25,12 @@
     <Filter Include="Header Files\Cars">
       <UniqueIdentifier>{93a6c5aa-6a76-42e9-85a8-592911984a60}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Data">
+      <UniqueIdentifier>{6aaa1eaf-76a0-4d1e-959e-20f945fe2acd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Menu">
+      <UniqueIdentifier>{0f8545c5-6b3b-43c6-9cff-9a7266840f51}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Source.cpp">
@@ -42,6 +48,12 @@
     <ClCompile Include="Cars.cpp">
       <Filter>Header Files\Cars</Filter>
     </ClCompile>
+    <ClCompile Include="Data.cpp">
+      <Filter>Header Files\Data</Filter>
+    </ClCompile>
+    <ClCompile Include="Menu.cpp">
+      <Filter>Header Files\Menu</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Console.h">
@@ -55,6 +67,12 @@
     </ClInclude>
     <ClInclude Include="Cars.h">
       <Filter>Header Files\Cars</Filter>
+    </ClInclude>
+    <ClInclude Include="Data.h">
+      <Filter>Header Files\Data</Filter>
+    </ClInclude>
+    <ClInclude Include="Menu.h">
+      <Filter>Header Files\Menu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

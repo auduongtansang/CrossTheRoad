@@ -11,8 +11,8 @@ void BufferSize(int &width, int &height)
 void Goto(int x, int y)
 {
 	COORD coord;
-	coord.X = y;
-	coord.Y = x;
+	coord.X = x;
+	coord.Y = y;
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
@@ -37,8 +37,8 @@ void BufferInit(Buffer &buffer)
 	int consoleHeight, consoleWidth;
 	BufferSize(consoleHeight, consoleWidth);
 
-	buffer.resize(consoleWidth / 2);
-	for (int x = 0; x < consoleWidth / 2; x++)
+	buffer.resize(consoleWidth);
+	for (int x = 0; x < consoleWidth; x++)
 	{
 		buffer[x].resize(consoleHeight);
 		for (int y = 0; y < consoleHeight; y++)
