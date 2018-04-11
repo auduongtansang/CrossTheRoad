@@ -12,7 +12,7 @@ void CarsInit(Cars &cars)
 	for (int i = 0; i < max_car; i++)
 	{
 		cars[i].character = (char)(254);
-		cars[i].speed = 1;
+		cars[i].speed = rand() % 3 + 1;
 		int random_pos = rand() % (consoleWidth / 2 - max_len - 2) + 1;
 		cars[i].node.resize(max_len);
 		for (int j = 0; j < max_len; j++)

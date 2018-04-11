@@ -4,6 +4,7 @@
 #include <iostream>
 #include <conio.h>
 #include "Console.h"
+#include "Game.h"
 
 using namespace std;
 

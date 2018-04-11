@@ -16,6 +16,18 @@ void Goto(int x, int y)
 	SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
 }
 
+void DeleteLine(int pos, int line)
+{
+	int consoleHeight, consoleWidth;
+	BufferSize(consoleWidth, consoleHeight);
+
+	Goto(pos, line);
+	for (int i = pos; i < consoleWidth - 1; i++)
+	{
+		putchar(' ');
+	}
+}
+
 void CursorStatus(DWORD size, BOOL visible)
 {
 	CONSOLE_CURSOR_INFO cci;
@@ -35,7 +47,7 @@ void ResizingOff(void)
 void BufferInit(Buffer &buffer)
 {
 	int consoleHeight, consoleWidth;
-	BufferSize(consoleHeight, consoleWidth);
+	BufferSize(consoleWidth, consoleHeight);
 
 	buffer.resize(consoleWidth);
 	for (int x = 0; x < consoleWidth; x++)
@@ -65,7 +77,7 @@ void BufferInit(Buffer &buffer)
 void BufferPrint(Buffer &buffer)
 {
 	int consoleHeight, consoleWidth;
-	BufferSize(consoleHeight, consoleWidth);
+	BufferSize(consoleWidth, consoleHeight);
 
 	Goto(0, 0);
 	for (int y = 0; y < consoleHeight; y++)

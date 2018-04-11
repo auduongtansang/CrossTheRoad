@@ -12,12 +12,11 @@ using namespace std;
 #define KEY_RIGHT 77
 #define KEY_ENTER 13
 
-enum Status { UP, LEFT, RIGHT, DOWN, NONE };
-
 typedef vector< vector<char> > Buffer;
 
 void BufferSize(int &width, int &height);
 void Goto(int x, int y);
+void DeleteLine(int pos, int line);
 void CursorStatus(DWORD size, BOOL visible);
 void ResizingOff(void);
 void BufferInit(Buffer &buffer);

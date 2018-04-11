@@ -8,10 +8,9 @@ void PeopleInit(People &people)
 	people.position.X = consoleWidth / 4 - 2;
 	people.position.Y = consoleHeight - 2;
 	people.character = 'Y';
-	people.status = NONE;
 }
 
-void PeopleMove(People &people, char key)
+void PeopleMove(People &people, int key)
 {
 	int consoleWidth, consoleHeight;
 	BufferSize(consoleWidth, consoleHeight);
@@ -47,7 +46,8 @@ void FinishedDraw(Peoples finished, Buffer &buffer)
 	}
 }
 
-void PeopleFinised(People people, Peoples &finished)
+void PeopleFinised(People &people, Peoples &finished)
 {
 	finished.push_back(people);
+	PeopleInit(people);
 }

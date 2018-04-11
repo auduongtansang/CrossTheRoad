@@ -60,7 +60,7 @@ bool LoadData(char *s, People &people, Peoples &finished, Cars &cars, Buffer &bu
 
 	ifstream f;
 	f.open(s, ios::in || ios::binary);
-	if (f.eof())
+	if (f.good() == false)
 	{
 		f.close();
 		return false;
