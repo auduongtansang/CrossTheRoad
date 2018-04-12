@@ -23,11 +23,11 @@ void PeopleMove(People &people, int key)
 	{
 		people.position.X--;
 	}
-	else if (key == 'd' && people.position.X < consoleWidth / 2 - 1)
+	else if (key == 'd' && people.position.X < consoleWidth / 2 - 2)
 	{
 		people.position.X++;
 	}
-	else if (key == 's' && people.position.Y < consoleHeight - 1)
+	else if (key == 's' && people.position.Y < consoleHeight - 2)
 	{
 		people.position.Y++;
 	}
