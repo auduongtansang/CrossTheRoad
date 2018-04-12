@@ -7,7 +7,7 @@ void PeopleInit(People &people)
 
 	people.position.X = consoleWidth / 4 - 2;
 	people.position.Y = consoleHeight - 5;
-	people.character = 'Y';
+	people.character = 'X';
 }
 
 void PeopleMove(People &people, int key)
