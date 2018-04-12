@@ -7,8 +7,8 @@ bool SaveData(char *s, People people, Peoples finished, Cars cars, Buffer buffer
 		return false;
 	}
 
-	ofstream f;
-	f.open(s, ios::out || ios::binary);
+	fstream f;
+	f.open(s, ios::out | ios::binary);
 
 	f.write((char*)&people, sizeof(People));
 
@@ -58,8 +58,8 @@ bool LoadData(char *s, People &people, Peoples &finished, Cars &cars, Buffer &bu
 		return false;
 	}
 
-	ifstream f;
-	f.open(s, ios::in || ios::binary);
+	fstream f;
+	f.open(s, ios::in | ios::binary);
 	if (f.good() == false)
 	{
 		f.close();

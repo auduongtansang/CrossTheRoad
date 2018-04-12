@@ -5,20 +5,20 @@ void CarsInit(Cars &cars)
 	int consoleHeight, consoleWidth;
 	BufferSize(consoleWidth, consoleHeight);
 
-	int max_car = consoleHeight - 4;
-	int max_len = consoleWidth / 6;
+	int max_car = consoleHeight - 16;
+	int max_len = consoleWidth / 12;
 
 	cars.resize(max_car);
 	for (int i = 0; i < max_car; i++)
 	{
 		cars[i].character = (char)(254);
-		cars[i].speed = rand() % 3 + 1;
+		cars[i].speed = 1;
 		int random_pos = rand() % (consoleWidth / 2 - max_len - 2) + 1;
 		cars[i].node.resize(max_len);
 		for (int j = 0; j < max_len; j++)
 		{
 			cars[i].node[j].X = random_pos + j;
-			cars[i].node[j].Y = i + 2;
+			cars[i].node[j].Y = i + 8;
 		}
 	}
 }
