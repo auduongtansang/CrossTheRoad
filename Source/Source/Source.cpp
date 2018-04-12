@@ -52,14 +52,14 @@ void GameStart(void)
 				}
 			}
 
+			BufferPrint(buffer);
+			Sleep(25);
+
 			if (Impact(people, cars, finished))
 			{
 				GameOver(isAlive);
-				OverMenu();		
+				OverMenu();
 			}
-
-			BufferPrint(buffer);
-			Sleep(25);
 		}
 	}
 }
@@ -82,9 +82,9 @@ void GameControl(void)
 	int key;
 	while (1)
 	{
-		key = _getch();
 		if (isAlive)
 		{
+			key = _getch();
 			if (!isAlive)
 			{
 				continue;
@@ -92,7 +92,7 @@ void GameControl(void)
 
 			if (key == 27)
 			{
-				GameOver(isAlive);
+				isAlive = false;
 			}
 			else if (key == 32 && pause == 0)
 			{
@@ -113,46 +113,10 @@ void GameControl(void)
 		{
 			turn = 0;
 
+			key = _getch();
 			if (key == 13)
 			{
-				int consoleWidth, consoleHeight;
-				BufferSize(consoleWidth, consoleHeight);
-
 				GamePause(dupGameID);
-				int rate = 0;
-
-				DeleteLine(consoleWidth / 2, consoleHeight / 2 - 1);
-				DeleteLine(consoleWidth / 2, consoleHeight / 2);
-				DeleteLine(consoleWidth / 2, consoleHeight / 2 + 1);
-				DeleteLine(consoleWidth / 2, consoleHeight / 2 + 2);
-				Goto(3 * consoleWidth / 4 - 12, consoleHeight / 2);
-				cout << "Press any key to continue";
-
-				while (1)
-				{
-					rate++;
-					if (rate > 1)
-					{
-						rate = 0;
-					}
-
-					if (rate)
-					{
-						Goto(people.position.X, people.position.Y);
-						putchar(177);
-					}
-					else
-					{
-						Goto(people.position.X, people.position.Y);
-						putchar(people.character);
-					}
-					Sleep(100);
-					if (_kbhit())
-					{
-						key = _getch();
-						break;
-					}
-				}
 				return;
 			}
 			else if (key == 's')
