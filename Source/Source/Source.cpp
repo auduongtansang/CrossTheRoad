@@ -24,9 +24,6 @@ HANDLE GameID, dupGameID;
 
 void GameStart(void)
 {
-	int consoleWidth, consoleHeight;
-	BufferSize(consoleWidth, consoleHeight);
-
 	while (1)
 	{
 		if (isAlive)
@@ -61,12 +58,7 @@ void GameStart(void)
 			if (Impact(people, cars, finished))
 			{
 				GameOver(isAlive);
-				DeleteLine(consoleWidth / 2, consoleHeight / 2 - 1);
-				DeleteLine(consoleWidth / 2, consoleHeight / 2);
-				DeleteLine(consoleWidth / 2, consoleHeight / 2 + 1);
-				DeleteLine(consoleWidth / 2, consoleHeight / 2 + 2);
-				Goto(3 * consoleWidth / 4 - 20, consoleHeight / 2);
-				cout << "Game over! Press ENTER to continue.";
+				OverMenu();
 			}
 		}
 	}
@@ -74,9 +66,6 @@ void GameStart(void)
 
 void GameControl(void)
 {
-	int consoleWidth, consoleHeight;
-	BufferSize(consoleWidth, consoleHeight);
-
 	if (turn == 1)
 	{
 		GameThread = thread(GameStart);
@@ -133,14 +122,7 @@ void GameControl(void)
 			else if (key == 's')
 			{
 				GamePause(dupGameID);
-				DeleteLine(consoleWidth / 2, consoleHeight / 2 - 1);
-				DeleteLine(consoleWidth / 2, consoleHeight / 2);
-				DeleteLine(consoleWidth / 2, consoleHeight / 2 + 1);
-				DeleteLine(consoleWidth / 2, consoleHeight / 2 + 2);
-				Goto(3 * consoleWidth / 4 - 20, consoleHeight / 2);
-				cout << "Enter file name (ex. your-file.bin) to save:";
-				Goto(3 * consoleWidth / 4 - 20, consoleHeight / 2 + 1);
-				CursorStatus(1, TRUE);
+				SaveFile();
 				char s[100];
 				gets_s(s, 100);
 				SaveData(s, people, finished, cars, buffer, isAlive);
@@ -160,38 +142,15 @@ newgame :
 
 	BufferInit(buffer);
 	BufferPrint(buffer);
-	DeleteLine(consoleWidth / 2, consoleHeight / 2 - 1);
-	DeleteLine(consoleWidth / 2, consoleHeight / 2);
-	DeleteLine(consoleWidth / 2, consoleHeight / 2 + 1);
-	DeleteLine(consoleWidth / 2, consoleHeight / 2 + 2);
-	Goto(3 * consoleWidth / 4 - 10, consoleHeight / 2 - 1);
-	cout << "1 - New game";
-	Goto(3 * consoleWidth / 4 - 10, consoleHeight / 2);
-	cout << "2 - Load game";
-	Goto(3 * consoleWidth / 4 - 10, consoleHeight / 2 + 1);
-	cout << "3 - Exit";
-	Goto(3 * consoleWidth / 4 - 10, consoleHeight / 2 + 2);
-	cout << "Your choice: ";
-	CursorStatus(1, TRUE);
+	
+	MainMenu();
 
 	char k;
 	cin >> k;
 	rewind(stdin);
 	if (k == '1')
 	{
-		DeleteLine(consoleWidth / 2, consoleHeight / 2 - 1);
-		DeleteLine(consoleWidth / 2, consoleHeight / 2);
-		DeleteLine(consoleWidth / 2, consoleHeight / 2 + 1);
-		DeleteLine(consoleWidth / 2, consoleHeight / 2 + 2);
-		Goto(3 * consoleWidth / 4 - 10, consoleHeight / 2 - 1);
-		cout << "W: up, A: left, D: right, S: down.";
-		Goto(3 * consoleWidth / 4 - 10, consoleHeight / 2);
-		cout << "SPACE to pause/resume.";
-		Goto(3 * consoleWidth / 4 - 10, consoleHeight / 2 + 1);
-		cout << "ESC + ENTER to return to main menu.";
-		Goto(3 * consoleWidth / 4 - 10, consoleHeight / 2 + 2);
-		cout << "ESC + S to save game and exit.";
-
+		GameMenu();
 		turn++;
 		GameInit(people, finished, cars, buffer, isAlive);
 		GameControl();
@@ -201,32 +160,13 @@ newgame :
 	{
 		CursorStatus(1, FALSE);
 		BufferPrint(buffer);
-		DeleteLine(consoleWidth / 2, consoleHeight / 2 - 1);
-		DeleteLine(consoleWidth / 2, consoleHeight / 2);
-		DeleteLine(consoleWidth / 2, consoleHeight / 2 + 1);
-		DeleteLine(consoleWidth / 2, consoleHeight / 2 + 2);
-		Goto(3 * consoleWidth / 4 - 20, consoleHeight / 2);
-		cout << "Enter filename (ex. your-file.bin) to load: ";
-		CursorStatus(1, TRUE);
-		Goto(3 * consoleWidth / 4 - 20, consoleHeight / 2 + 1);
+		LoadFile();
 		char s[100];
 		rewind(stdin);
 		gets_s(s, 100);
 		if (LoadData(s, people, finished, cars, buffer, isAlive))
 		{
-			DeleteLine(consoleWidth / 2, consoleHeight / 2 - 1);
-			DeleteLine(consoleWidth / 2, consoleHeight / 2);
-			DeleteLine(consoleWidth / 2, consoleHeight / 2 + 1);
-			DeleteLine(consoleWidth / 2, consoleHeight / 2 + 2);
-			Goto(3 * consoleWidth / 4 - 10, consoleHeight / 2 - 1);
-			cout << "W: up, A: left, D: right, S: down.";
-			Goto(3 * consoleWidth / 4 - 10, consoleHeight / 2);
-			cout << "SPACE to pause/resume.";
-			Goto(3 * consoleWidth / 4 - 10, consoleHeight / 2 + 1);
-			cout << "ESC + ENTER to return to main menu.";
-			Goto(3 * consoleWidth / 4 - 10, consoleHeight / 2 + 2);
-			cout << "ESC + S to save game and exit.";
-
+			GameMenu();
 			isAlive = true;
 			people.character = 'Y';
 			CursorStatus(1, FALSE);
@@ -249,13 +189,7 @@ newgame :
 	{
 		CursorStatus(1, FALSE);
 		BufferPrint(buffer);
-		DeleteLine(consoleWidth / 2, consoleHeight / 2 - 1);
-		DeleteLine(consoleWidth / 2, consoleHeight / 2);
-		DeleteLine(consoleWidth / 2, consoleHeight / 2 + 1);
-		DeleteLine(consoleWidth / 2, consoleHeight / 2 + 2);
-		Goto(3 * consoleWidth / 4 - 5, consoleHeight / 2);
-		cout << "Good bye!";
-		_getch();
+		ExitMenu();
 		return 0;
 	}
 	else
