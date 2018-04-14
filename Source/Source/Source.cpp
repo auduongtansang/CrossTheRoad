@@ -14,6 +14,7 @@ People people;
 Peoples finished;
 Cars cars;
 Buffer buffer;
+int level = 1;
 bool isAlive;
 int delay = 3;
 int gamerate = 0;
@@ -24,6 +25,9 @@ HANDLE GameID, dupGameID;
 
 void GameStart(void)
 {
+	int consoleWidth, consoleHeight;
+	BufferSize(consoleWidth, consoleHeight);
+
 	while (1)
 	{
 		if (isAlive)
@@ -50,16 +54,24 @@ void GameStart(void)
 				{
 					delay = 3;
 				}
+				level++;
+				char s[3];
+				strcpy_s(s, 3, "00");
+				s[1] = (level % 10) + 48;
+				s[0] = (level / 10) + 48;
+				Goto(3 * consoleWidth / 4 - 4, consoleHeight / 2 - 3);
+				cout << "Level: " << s;
+			}
+
+			if (Impact(people, cars, finished))
+			{
+				OverMenu();
+				GameOver(isAlive);
 			}
 
 			BufferPrint(buffer);
 			Sleep(25);
 
-			if (Impact(people, cars, finished))
-			{
-				GameOver(isAlive);
-				OverMenu();
-			}
 		}
 	}
 }
@@ -82,9 +94,9 @@ void GameControl(void)
 	int key;
 	while (1)
 	{
+		key = _getch();
 		if (isAlive)
 		{
-			key = _getch();
 			if (!isAlive)
 			{
 				continue;
@@ -92,7 +104,7 @@ void GameControl(void)
 
 			if (key == 27)
 			{
-				isAlive = false;
+				GameOver(isAlive);
 			}
 			else if (key == 32 && pause == 0)
 			{
@@ -112,20 +124,54 @@ void GameControl(void)
 		else
 		{
 			turn = 0;
+			GamePause(dupGameID);
 
-			key = _getch();
 			if (key == 13)
 			{
+				int consoleWidth, consoleHeight;
+				BufferSize(consoleWidth, consoleHeight);
 				GamePause(dupGameID);
+				int rate = 0;
+				DeleteLine(consoleWidth / 2, consoleHeight / 2 - 3);
+				DeleteLine(consoleWidth / 2, consoleHeight / 2 - 1);
+				DeleteLine(consoleWidth / 2, consoleHeight / 2);
+				DeleteLine(consoleWidth / 2, consoleHeight / 2 + 1);
+				DeleteLine(consoleWidth / 2, consoleHeight / 2 + 2);
+				Goto(3 * consoleWidth / 4 - 12, consoleHeight / 2);
+				cout << "Press any key to continue.";
+
+				while (1)
+				{
+					rate = (rate + 1) % 2;
+					if (rate)
+					{
+						Goto(people.position.X, people.position.Y);
+						putchar(177);
+					}
+					else
+					{
+						Goto(people.position.X, people.position.Y);
+						putchar(people.character);
+					}
+					Sleep(110);
+					if (_kbhit())
+					{
+						key = _getch();
+						break;
+					}
+				}
 				return;
 			}
 			else if (key == 's')
 			{
-				GamePause(dupGameID);
+				int consoleWidth, consoleHeight;
+				BufferSize(consoleWidth, consoleHeight);
+
+				DeleteLine(consoleWidth / 2, consoleHeight / 2 - 3);
 				SaveFile();
 				char s[100];
 				gets_s(s, 100);
-				SaveData(s, people, finished, cars, buffer, isAlive);
+				SaveData(s, people, finished, cars, buffer, isAlive, level);
 				return;
 			}
 		}
@@ -138,11 +184,11 @@ int main(void)
 	int consoleWidth, consoleHeight;
 	BufferSize(consoleWidth, consoleHeight);
 
-newgame :
+newgame:
 
 	BufferInit(buffer);
 	BufferPrint(buffer);
-	
+
 	MainMenu();
 
 	char k;
@@ -151,8 +197,10 @@ newgame :
 	if (k == '1')
 	{
 		GameMenu();
+		Goto(3 * consoleWidth / 4 - 4, consoleHeight / 2 - 3);
+		cout << "Level: 01";
 		turn++;
-		GameInit(people, finished, cars, buffer, isAlive);
+		GameInit(people, finished, cars, buffer, isAlive, level);
 		GameControl();
 		goto newgame;
 	}
@@ -164,9 +212,15 @@ newgame :
 		char s[100];
 		rewind(stdin);
 		gets_s(s, 100);
-		if (LoadData(s, people, finished, cars, buffer, isAlive))
+		if (LoadData(s, people, finished, cars, buffer, isAlive, level))
 		{
 			GameMenu();
+			char s[3];
+			strcpy_s(s, 3, "00");
+			s[1] = (level % 10) + 48;
+			s[0] = (level / 10) + 48;
+			Goto(3 * consoleWidth / 4 - 4, consoleHeight / 2 - 3);
+			cout << "Level: " << s;
 			isAlive = true;
 			people.character = 'Y';
 			CursorStatus(1, FALSE);

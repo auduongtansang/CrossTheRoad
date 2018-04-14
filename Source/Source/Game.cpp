@@ -1,12 +1,13 @@
 #include "Game.h"
 
-void GameInit(People &people, Peoples &finished, Cars &cars, Buffer &buffer, bool &isAlive)
+void GameInit(People &people, Peoples &finished, Cars &cars, Buffer &buffer, bool &isAlive, int &level)
 {
 	PeopleInit(people);
 	finished.resize(0);
 	CarsInit(cars);
 	BufferInit(buffer);
 	isAlive = true;
+	level = 1;
 
 	CursorStatus(100, FALSE);
 	ResizingOff();

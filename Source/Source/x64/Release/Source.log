@@ -1,8 +1,13 @@
-﻿  Menu.cpp
+﻿  Cars.cpp
+  Console.cpp
+  Data.cpp
+  Game.cpp
+  Menu.cpp
+  People.cpp
   Source.cpp
   Generating code
-  10 of 843 functions ( 1.2%) were compiled, the rest were copied from previous compilation.
-    5 functions were new in current compilation
-    8 functions had inline decision re-evaluated but remain unchanged
+  843 of 843 functions (100.0%) were compiled.
+    21 functions were new in current compilation
+    0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  Source.vcxproj -> E:\GitHub\CrossTheRoad\Source\x64\Release\Source.exe
+  Source.vcxproj -> E:\Project\CrossTheRoad\Source\x64\Release\Source.exe

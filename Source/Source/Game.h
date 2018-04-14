@@ -6,7 +6,7 @@
 #include "People.h"
 #include "Cars.h"
 
-void GameInit(People &people, Peoples &finished, Cars &cars, Buffer &buffer, bool &isAlive);
+void GameInit(People &people, Peoples &finished, Cars &cars, Buffer &buffer, bool &isAlive, int &level);
 void GamePause(HANDLE thread);
 void GameOver(bool &isAlive);
 void GameEnd(HANDLE thread);

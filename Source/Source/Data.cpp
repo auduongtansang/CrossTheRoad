@@ -1,6 +1,6 @@
 #include "Data.h"
 
-bool SaveData(char *s, People people, Peoples finished, Cars cars, Buffer buffer, bool isAlive)
+bool SaveData(char *s, People people, Peoples finished, Cars cars, Buffer buffer, bool isAlive, int level)
 {
 	if (s == NULL)
 	{
@@ -47,11 +47,13 @@ bool SaveData(char *s, People people, Peoples finished, Cars cars, Buffer buffer
 	}
 
 	f.write((char*)&isAlive, sizeof(bool));
+
+	f.write((char*)&level, sizeof(int));
 	f.close();
 	return true;
 }
 
-bool LoadData(char *s, People &people, Peoples &finished, Cars &cars, Buffer &buffer, bool &isAlive)
+bool LoadData(char *s, People &people, Peoples &finished, Cars &cars, Buffer &buffer, bool &isAlive, int &level)
 {
 	if (s == NULL)
 	{
@@ -105,6 +107,9 @@ bool LoadData(char *s, People &people, Peoples &finished, Cars &cars, Buffer &bu
 	}
 
 	f.read((char*)&isAlive, sizeof(bool));
+
+	f.read((char*)&level, sizeof(int));
+
 	f.close();
 	return true;
 }
