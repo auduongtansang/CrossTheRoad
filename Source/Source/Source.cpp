@@ -1,5 +1,6 @@
 #include <iostream>
 #include <thread>
+#include <Windows.h>
 #include <time.h>
 #include "Console.h"
 #include "People.h"
@@ -45,7 +46,12 @@ void GameStart(void)
 			CarsDraw(cars, buffer);
 			PeopleDraw(people, buffer);
 
-			if (people.position.Y == 7)
+			if (Impact(people, cars, finished))
+			{
+				OverMenu();
+				GameOver(isAlive);
+			}
+			else if (people.position.Y == 7)
 			{
 				PeopleFinised(people, finished);
 				PeopleDraw(people, buffer);
@@ -61,12 +67,6 @@ void GameStart(void)
 				s[0] = (level / 10) + 48;
 				Goto(3 * consoleWidth / 4 - 4, consoleHeight / 2 - 3);
 				cout << "Level: " << s;
-			}
-
-			if (Impact(people, cars, finished))
-			{
-				OverMenu();
-				GameOver(isAlive);
 			}
 
 			BufferPrint(buffer);
@@ -130,6 +130,7 @@ void GameControl(void)
 			{
 				int consoleWidth, consoleHeight;
 				BufferSize(consoleWidth, consoleHeight);
+
 				GamePause(dupGameID);
 				int rate = 0;
 				DeleteLine(consoleWidth / 2, consoleHeight / 2 - 3);
@@ -137,9 +138,10 @@ void GameControl(void)
 				DeleteLine(consoleWidth / 2, consoleHeight / 2);
 				DeleteLine(consoleWidth / 2, consoleHeight / 2 + 1);
 				DeleteLine(consoleWidth / 2, consoleHeight / 2 + 2);
-				Goto(3 * consoleWidth / 4 - 12, consoleHeight / 2);
-				cout << "Press any key to continue.";
+				Goto(3 * consoleWidth / 4 - 4, consoleHeight / 2);
+				cout << "Game over.";
 
+				int flash = 0;
 				while (1)
 				{
 					rate = (rate + 1) % 2;
@@ -154,9 +156,9 @@ void GameControl(void)
 						putchar(people.character);
 					}
 					Sleep(110);
-					if (_kbhit())
+					flash++;
+					if (flash == 15)
 					{
-						key = _getch();
 						break;
 					}
 				}
@@ -167,6 +169,7 @@ void GameControl(void)
 				int consoleWidth, consoleHeight;
 				BufferSize(consoleWidth, consoleHeight);
 
+				GamePause(dupGameID);
 				DeleteLine(consoleWidth / 2, consoleHeight / 2 - 3);
 				SaveFile();
 				char s[100];

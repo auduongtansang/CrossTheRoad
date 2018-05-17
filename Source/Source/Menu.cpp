@@ -94,6 +94,6 @@ void OverMenu(void)
 	DeleteLine(consoleWidth / 2, consoleHeight / 2 + 2);
 	Goto(3 * consoleWidth / 4 - 4, consoleHeight / 2);
 	cout << "Game over!";
-	Goto(3 * consoleWidth / 4 - 20, consoleHeight / 2 + 1);
+	Goto(3 * consoleWidth / 4 - 22, consoleHeight / 2 + 1);
 	cout << "Press ENTER to return main menu or S to save file.";
 }

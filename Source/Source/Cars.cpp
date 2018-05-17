@@ -6,7 +6,7 @@ void CarsInit(Cars &cars)
 	BufferSize(consoleWidth, consoleHeight);
 
 	int max_car = consoleHeight - 16;
-	int max_len = consoleWidth / 12;
+	int max_len = consoleWidth / 5;
 
 	cars.resize(max_car);
 	for (int i = 0; i < max_car; i++)
